@@ -22,7 +22,7 @@ def test_delete_one():
         for dict in content_as_list_of_dict:
             if dict['name']=="sas" and dict['surname']=="sasa" and dict['phone_number']=="sasas":
                 content_as_list_of_dict.remove(dict)   
-    return ( exdict not in content_as_list_of_dict)
+    assert ( exdict not in content_as_list_of_dict)
         # self.assertFalse( exdict in content_as_list_of_dict)
 
 def test_select_and_list(name='javid', db='db/test.json', surname='dovlatov'):
@@ -34,10 +34,10 @@ def test_select_and_list(name='javid', db='db/test.json', surname='dovlatov'):
             print(f"Name: {dict['name']},  Surname: {dict['surname']}, Phone Number: {dict['phone_number']}")
 
 def test_update(db='db/test.json'):
-    update_record('test_name', 'test_surname', 'new_name', 'new_surname', '', db)
+    update_record('test_name', 'test_surname', 'new_name', 'new_surname', '', db=db)
     with open (db, 'r') as file:
         old_content=file.read()
-    update_record('new_name', 'new_surname', 'test_name', 'test_surname', '', db)
+    update_record('new_name', 'new_surname', 'test_name', 'test_surname', '',db=db)
     with open (db, 'r') as file:
         new_content=file.read()
-    return old_content!=new_content
+    assert old_content!=new_content
